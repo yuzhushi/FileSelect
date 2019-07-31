@@ -92,18 +92,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //加载布局
         View contentView = View.inflate(MainActivity.this, R.layout.pop, null);
         pop = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-        pop.showAtLocation(layout, Gravity.CENTER, 0, 0);
+        //在此pop的区域 外点击关闭此窗口
+        pop.showAtLocation(layout, Gravity.CENTER,0,0);
+        pop.setOutsideTouchable(true);
         // 设置背景图片， 必须设置，不然动画没作用
         pop.setBackgroundDrawable(new BitmapDrawable());
         pop.setFocusable(true);
-        // 设置点击popupwindow外屏幕其它地方消失
-        pop.setOutsideTouchable(true);
         WindowManager.LayoutParams lp=getWindow().getAttributes();
-            lp.alpha=0.3f;
-            getWindow().setAttributes(lp);
-            pop.setOutsideTouchable(true);
-             //添加pop窗口关闭事件  
-            pop.setOnDismissListener(new poponDismissListener());
+        lp.alpha=0.3f;
+        getWindow().setAttributes(lp);
+        pop.setOutsideTouchable(true);
+        //添加pop窗口关闭事件  
+        pop.setOnDismissListener(new poponDismissListener());
         recycler = contentView.findViewById(R.id.recyView);
         TextView yes = contentView.findViewById(R.id.yes);
         TextView no = contentView.findViewById(R.id.no);
